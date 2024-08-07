@@ -1,3 +1,5 @@
+'use client' //Next.js 13과 같은 최신 프레임워크에서 등장하며, 이 디렉티브는 특정 코드가 클라이언트 측에서 실행되어야 함을 명시합니다. 이는 서버 측에서 실행되지 않고 브라우저에서만 실행되어야 함을 의미합니다.
+
 import { IconType } from "@/node_modules/react-icons/lib/iconBase";
 
 interface ButtonProps {
@@ -14,10 +16,12 @@ const Button: React.FC<ButtonProps> = ({
     disabled,
     outline,
     small,
-    icon
+    icon:Icon
 }) => {
     return (
         <button
+            onClick={onClick}
+            disabled={disabled}
             className={`
             relative
             disabled:opacity-70
@@ -34,6 +38,15 @@ const Button: React.FC<ButtonProps> = ({
             ${ small ? 'font-light' : 'font-semibold' }
             ${ small ? 'border-[1px]' : 'border-2' }
             `}>
+            {Icon && (
+                <Icon
+                    size={24}
+                    className="
+                       absolute
+                       left-4
+                       top-3 
+                    " />
+            )}
             {label}
         </button>
      );
