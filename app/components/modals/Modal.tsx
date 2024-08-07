@@ -44,6 +44,13 @@ const Modal: React.FC<ModalProps> = ({
         }, 300);
     }, [disabled, onClose]);
 
+    const handleSubmit = useCallback(() => {
+        if (disabled) {
+            return;
+        }
+        onSubmit();
+    }, [disabled,onSubmit]);
+
     const handleSecondaryAction = useCallback(() => {
         if (disabled || !secondaryAction) {
             return;
@@ -145,7 +152,17 @@ const Modal: React.FC<ModalProps> = ({
                                         gap-4
                                         w-full
                                     ">
-                                    <Button small label="My Button"/>
+                                    {secondaryAction && secondaryLabel && (
+                                    <Button
+                                        outline 
+                                        disabled = {disabled}
+                                        label = {secondaryLabel}
+                                        onClick = {handleSecondaryAction}/>
+                                    )}
+                                    <Button 
+                                        disabled = {disabled}
+                                        label = {actionLabel}
+                                        onClick = {handleSubmit}/>
                                 </div>
                             </div>
                         </div>
