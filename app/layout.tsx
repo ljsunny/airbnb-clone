@@ -4,6 +4,7 @@ import Modal from "./components/modals/Modal";
 import RegisterModal from "./components/modals/RegisterModal";
 import Navbar from "./components/navbar/Navbar";
 import "./globals.css";
+import ToasterProvider from "./providers/ToasterProvider";
 
 const font = Nunito({ subsets: ["latin"] });
 
@@ -25,6 +26,7 @@ export default function RootLayout({
             actionLabel="submit" 
             title="Hello world" 
             isOpen={true} /> */}
+          <ToasterProvider/>
           <RegisterModal />
           <Navbar />
         </ClientOnly>
