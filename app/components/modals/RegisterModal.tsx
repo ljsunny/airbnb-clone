@@ -1,9 +1,9 @@
 'use client'
 
 import axios from 'axios';
-import {AiFillGithub} from "react-icon/ai";
-import {FcGoogle} from "react-icons/fc";
-import {useCallback, useState} from 'react';
+import { AiFillGithub } from "react-icon/ai";
+import { FcGoogle } from "react-icons/fc";
+import { useCallback, useState } from 'react';
 import {
     FieldValues,
     SubmitHandler,
@@ -13,6 +13,7 @@ import {
 import useRegisterModal from '@/app/hooks/useRegisterModal';
 import Modal from './Modal';
 import Heading from '../navbar/Heading';
+import Input from '../inputs/inputs';
 
 const RegisterModal = () => {
     const registerModal = useRegisterModal();
@@ -26,32 +27,56 @@ const RegisterModal = () => {
         }
     } = useForm<FieldValues>({
         defaultValues: {
-            name:'',
-            email:'',
-            password:''
+            name: '',
+            email: '',
+            password: ''
         }
     });
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
         setIsLoading(true);
 
-        axios.post('/api/register',data)
-            .then (()=> {
+        axios.post('/api/register', data)
+            .then(() => {
                 registerModal.onClose();
             })
-            .catch((error)=>{
+            .catch((error) => {
                 console.log(error);
             })
-            .finally(()=> {
+            .finally(() => {
                 setIsLoading(false);
             })
     }
-    
+
     const bodyContent = (
         <div className="flex flex-col gap-4">
-            <Heading/>
+            <Heading
+                title="Welcome to Airbnb"
+                subtitle="Create an account!"
+            />
+            <Input
+                id="email"
+                label="Email"
+                disabled={isLoading}
+                register={register}
+                errors={errors}
+                required />
+            <Input
+                id="name"
+                label="name"
+                disabled={isLoading}
+                register={register}
+                errors={errors}
+                required />
+            <Input
+                id="password"
+                label="password"
+                disabled={isLoading}
+                register={register}
+                errors={errors}
+                required />
         </div>
     )
-    return ( 
+    return (
         <Modal
             disabled={isLoading}
             isOpen={registerModal.isOpen}
@@ -60,10 +85,8 @@ const RegisterModal = () => {
             onClose={registerModal.onClose}
             onSubmit={handleSubmit(onSubmit)}
             body={bodyContent}
-        >
-
-        </Modal>
-     );
+        />
+    );
 }
- 
+
 export default RegisterModal;
