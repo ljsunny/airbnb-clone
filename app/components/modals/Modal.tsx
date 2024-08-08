@@ -126,7 +126,7 @@ const Modal: React.FC<ModalProps> = ({
                         ">
                                 {title}
                                 <button
-                                    onClose={handleClose}
+                                    onClick={handleClose}
                                     className="
                                 p-1
                                 border-0
