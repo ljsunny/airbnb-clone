@@ -13,6 +13,7 @@
     "@prisma/client": "^5.18.0",
     "again": "^0.0.1",
     "axios": "^1.7.3",
+    "bcrypt": "^5.1.1",
     "boxicons": "^2.1.4",
     "next": "14.2.5",
     "next-auth": "^4.24.7",
